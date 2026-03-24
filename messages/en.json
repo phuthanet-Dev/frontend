@@ -1,0 +1,150 @@
+{
+    "app": {
+        "title": "Mystic Cards — Online Tarot & Card Reading",
+        "subtitle": "Unveil Your Destiny",
+        "description": "Choose your deck, shuffle the cards, and discover what the universe has in store for you."
+    },
+    "nav": {
+        "home": "Home",
+        "marketplace": "Consult an Astrologer",
+        "language": "Language",
+        "signIn": "Sign In",
+        "signOut": "Sign Out",
+        "next": "Next",
+        "previous": "Previous",
+        "step": "Step {current} of {total}",
+        "stepType": "Interest",
+        "stepDeck": "Deck",
+        "stepSpread": "Spread"
+    },
+    "reading": {
+        "selectType": "Choose Your Interest",
+        "love": "Love & Relationships",
+        "career": "Career",
+        "finance": "Finance & Career",
+        "daily": "Daily Guidance",
+        "health": "Health & Wellness",
+        "question": "Ask a Question",
+        "questionPrompt": "What would you like to ask the cards?",
+        "questionPlaceholder": "e.g., Will I get the new job?",
+        "exLove": "Will I find true love soon?",
+        "exCareer": "What is the next step in my career?",
+        "exFinance": "Will my financial situation improve this year?",
+        "exDaily": "What do I need to focus on today?",
+        "exHealth": "How can I improve my overall well-being?"
+    },
+    "coin": {
+        "balance": "Coins",
+        "topup": "Top Up Coins",
+        "notEnough": "Not enough coins",
+        "cost": "Cost: {amount} coins",
+        "success": "Top up successful!",
+        "error": "Failed to top up coins"
+    },
+    "deck": {
+        "selectDeck": "Choose Your Deck",
+        "tarot": "Tarot",
+        "tarotDesc": "The classic 78-card Tarot deck with Major and Minor Arcana",
+        "lenormand": "Lenormand",
+        "lenormandDesc": "The 36-card Lenormand fortune-telling deck",
+        "oracle": "Oracle",
+        "oracleDesc": "A 44-card Oracle deck for spiritual guidance",
+        "playing": "Playing Cards",
+        "playingDesc": "A standard 52-card playing deck for cartomancy",
+        "selectedDeck": "Selected Deck",
+        "cardsInDeck": "cards in deck"
+    },
+    "cards": {
+        "shuffle": "Shuffle Deck",
+        "shuffling": "Shuffling...",
+        "selectCard": "Select a card to reveal your reading",
+        "tapToSelect": "Tap a card to select",
+        "clickToSelect": "Click a card to reveal",
+        "useSlider": "Use the slider to browse, then tap to select",
+        "cardRevealed": "Your Card",
+        "readingResult": "Your Reading",
+        "newReading": "New Reading",
+        "cardNumber": "Card",
+        "cutDeck": "Cut Deck",
+        "cutting": "Cutting..."
+    },
+    "result": {
+        "title": "Your Reading Result",
+        "meaning": "Meaning",
+        "advice": "Advice",
+        "yourQuestion": "Your Question",
+        "aiWallpaper": "✨ Get a Personalized AI Wallpaper",
+        "aiWallpaperDesc": "Transform your reading into a beautiful, mystical phone wallpaper — crafted just for you.",
+        "getWallpaper": "Generate My Wallpaper",
+        "consultAstrologer": "Want deeper insight?",
+        "consultCta": "Consult a Professional Astrologer",
+        "previousCard": "Previous",
+        "nextCard": "Next",
+        "cardPosition": "Card {current} of {total}",
+        "readingSummary": "Reading Summary",
+        "viewCardsAgain": "View Cards Again",
+        "summaryMessage": "Your reading is complete. Here is the overview of the energies revealed to you today."
+    },
+    "freemium": {
+        "freeReadingUsed": "You've used your free reading for today.",
+        "watchAd": "Watch an Ad for Another Reading",
+        "unlimitedAccess": "Get Unlimited Access",
+        "readingsRemaining": "You have {count} free readings left today",
+        "watchAdTitle": "Want Another Reading?",
+        "watchAdDesc": "Watch a short ad to unlock one more free reading — the stars await!",
+        "watching": "Your reading unlocks in {seconds}s...",
+        "adComplete": "Reading Unlocked!",
+        "adCompleteDesc": "The universe has rewarded your patience. Your free reading is ready!",
+        "claimReading": "Start My Reading",
+        "close": "Maybe later"
+    },
+    "footer": {
+        "copyright": "© 2026 Mystic Cards. All rights reserved.",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
+    },
+    "auth": {
+        "welcomeTitle": "Welcome to Mystic Cards",
+        "profileSubtitle": "Please complete your destiny profile to get accurate readings.",
+        "signInTitle": "Sign In",
+        "signUpTitle": "Sign Up",
+        "email": "Email",
+        "password": "Password",
+        "signInBtn": "Sign In",
+        "signUpBtn": "Sign Up",
+        "or": "or",
+        "continueWithGoogle": "Continue with Google",
+        "noAccount": "Don't have an account?",
+        "hasAccount": "Already have an account?",
+        "signUpLink": "Sign up",
+        "signInLink": "Sign in",
+        "emailAlreadyInUse": "This email is already registered. If you signed up with Google, please click 'Continue with Google'.",
+        "invalidCredential": "Invalid email or password. If you signed up with Google, please click 'Continue with Google'."
+    },
+    "spread": {
+        "selectSpread": "How Many Cards Will You Draw?",
+        "cards": "cards",
+        "beginReading": "Begin Your Reading",
+        "tarot": {
+            "1": "Daily Insight",
+            "3": "Past • Present • Future",
+            "10": "Celtic Cross: Deep Dive Analysis"
+        },
+        "lenormand": {
+            "3": "The Path Ahead",
+            "5": "Current Narrative",
+            "9": "3x3 Grid: Detailed Portrait"
+        },
+        "oracle": {
+            "1": "Message from the Universe",
+            "2": "Energy Challenge • Healing Focus",
+            "3": "Mind • Body • Spirit"
+        },
+        "playing": {
+            "3": "Immediate Influences",
+            "5": "Road to Success",
+            "7": "Environmental Overview",
+            "9": "The Grand Reveal"
+        }
+    }
+}
