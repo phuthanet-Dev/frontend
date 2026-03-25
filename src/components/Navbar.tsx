@@ -51,7 +51,7 @@ export default function Navbar({ currentLocale, onLocaleChange, onOpenAuthModal 
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6 }}
-                className="w-full py-4 px-6 flex items-center justify-between glass-dark z-40"
+                className="w-full py-4 px-6 flex items-center justify-between glass-dark sticky top-0 z-50 shadow-md backdrop-blur-md"
             >
                 {/* Logo / Brand */}
                 <div className="flex items-center gap-3">
@@ -75,9 +75,49 @@ export default function Navbar({ currentLocale, onLocaleChange, onOpenAuthModal 
                     </div>
                 </div>
 
-                {/* Right side: Nav links + Language toggle */}
-                <div className="flex items-center gap-4">
-                    {/* Phase 2: Marketplace — hidden for now */}
+                {/* Center: Main Navigation */}
+                <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-8">
+                    <a
+                        href="/"
+                        className="text-sm font-semibold text-mystic-200 hover:text-gold-300 transition-colors"
+                    >
+                        {t("nav.home")}
+                    </a>
+
+                    {/* How to Use Dropdown */}
+                    <div className="relative group">
+                        <button className="text-sm font-semibold text-mystic-200 hover:text-gold-300 transition-colors flex items-center gap-1 py-4">
+                            {t("nav.howToUse")}
+                            <span className="text-[10px] opacity-70 group-hover:rotate-180 transition-transform">▼</span>
+                        </button>
+                        <div className="absolute top-12 left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                            <div className="bg-mystic-900 border border-mystic-600/50 rounded-xl shadow-2xl overflow-hidden py-2 min-w-[200px]">
+                                <a
+                                    href="/articles/how-to-use-app"
+                                    className="block px-4 py-3 text-sm text-mystic-100 hover:bg-mystic-800 hover:text-gold-300 transition-colors"
+                                >
+                                    {t("nav.guideApp")}
+                                </a>
+                                <a
+                                    href="/articles/how-to-topup"
+                                    className="block px-4 py-3 text-sm text-mystic-100 hover:bg-mystic-800 hover:text-gold-300 transition-colors"
+                                >
+                                    {t("nav.guideTopup")}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a
+                        href="/articles"
+                        className="text-sm font-semibold text-mystic-200 hover:text-gold-300 transition-colors"
+                    >
+                        {t("nav.articles")}
+                    </a>
+                </div>
+
+                {/* Right side: Auth + Language toggle */}
+                <div className="flex items-center gap-4 relative z-10">
                     {/* <motion.a
                     href="#"
                     whileHover={{ scale: 1.05 }}

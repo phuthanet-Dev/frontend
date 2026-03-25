@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { NextIntlClientProvider, useTranslations } from "next-intl";
+import { NextIntlClientProvider, useTranslations, useLocale } from "next-intl";
 import Navbar from "@/components/Navbar";
 import DeckSelector from "@/components/DeckSelector";
 import CardFan from "@/components/CardFan";
@@ -238,16 +238,23 @@ function TarotAppInner({
                 </AnimatePresence>
             </main>
 
+            {/* SEO Informative Content for AdSense (Thin Content Prevention) */}
+            {phase === "select" && (
+                <section className="max-w-4xl mx-auto px-4 py-12 text-center text-mystic-300/70">
+                    <h2 className="text-2xl font-semibold mb-4 text-mystic-200">{t("seo.title")}</h2>
+                    <p className="text-sm leading-relaxed max-w-2xl mx-auto">
+                        {t("seo.description")}
+                    </p>
+                </section>
+            )}
+
             {/* Footer */}
-            <footer className="py-6 text-center border-t border-mystic-600/30">
-                <p className="text-mystic-300/40 text-xs">{t("footer.copyright")}</p>
-                <div className="flex justify-center gap-6 mt-2">
-                    <a href="#" className="text-mystic-300/40 hover:text-gold-400 text-xs transition-colors">
-                        {t("footer.privacy")}
-                    </a>
-                    <a href="#" className="text-mystic-300/40 hover:text-gold-400 text-xs transition-colors">
-                        {t("footer.terms")}
-                    </a>
+            <footer className="py-6 text-center border-t border-mystic-600/30 mt-auto">
+                <p className="text-mystic-300/40 text-xs mb-3 max-w-2xl mx-auto px-4">{t("footer.disclaimer")}</p>
+                <div className="flex justify-center flex-wrap gap-4 mt-2">
+                    <a href="/privacy-policy" className="text-mystic-300/40 hover:text-mystic-300 transition-colors text-xs">{t("footer.privacyPolicy") || "Privacy Policy"}</a>
+                    <p className="text-mystic-300/40 text-xs">{t("footer.copyright")}</p>
+                    <a href="/terms-of-use" className="text-mystic-300/40 hover:text-mystic-300 transition-colors text-xs">{t("footer.termsOfUse") || "Terms of Use"}</a>
                 </div>
             </footer>
 
@@ -291,14 +298,26 @@ function TarotAppInner({
 
 // ——— Outer wrapper that manages locale & provider ———
 function TarotAppContent() {
-    const [locale, setLocale] = useState("th");
+    const serverLocale = useLocale();
+    const [locale, setLocale] = useState(serverLocale); // Initialize default, then sync in useEffect to avoid hydration mismatch if standard Next.js cookie hydration isn't working perfectly due to static export
     const [messages, setMessages] = useState<Record<string, any> | null>(null);
+
+    // Initial load sync with cookie
+    useEffect(() => {
+        const match = document.cookie.match(new RegExp('(^| )MYSTIC_LOCALE=([^;]+)'));
+        const savedLocale = match ? match[2] : "th";
+        if (savedLocale !== "th") {
+            setLocale(savedLocale);
+            import(`../../messages/${savedLocale}.json`).then(msgs => setMessages(msgs.default));
+        }
+    }, []);
 
     const handleLocaleChange = useCallback(async (newLocale: string) => {
         try {
             const msgs = await import(`../../messages/${newLocale}.json`);
             setMessages(msgs.default);
             setLocale(newLocale);
+            document.cookie = `MYSTIC_LOCALE=${newLocale}; path=/; max-age=31536000`;
         } catch (e) {
             console.error("Failed to load locale:", newLocale, e);
         }

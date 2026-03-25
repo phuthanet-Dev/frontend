@@ -6,6 +6,11 @@
     },
     "nav": {
         "home": "Home",
+        "howToUse": "User Guide",
+        "guideApp": "How to Use Mystic Cards",
+        "guideTopup": "How to Top Up Coins",
+        "articles": "Articles",
+        "articlesDesc": "Discover expert guides, card meanings, and divination techniques.",
         "marketplace": "Consult an Astrologer",
         "language": "Language",
         "signIn": "Sign In",
@@ -99,9 +104,14 @@
         "close": "Maybe later"
     },
     "footer": {
+        "disclaimer": "Mystic Cards is for entertainment purposes only. The readings provided do not substitute for professional medical, legal, or financial advice.",
         "copyright": "© 2026 Mystic Cards. All rights reserved.",
-        "privacy": "Privacy Policy",
-        "terms": "Terms of Service"
+        "privacyPolicy": "Privacy Policy",
+        "termsOfUse": "Terms of Use"
+    },
+    "seo": {
+        "title": "About Mystic Cards",
+        "description": "Welcome to Mystic Cards, your digital sanctuary for Tarot, Oracle, and Lenormand readings. Whether you are seeking daily guidance, deep introspective answers through the Celtic Cross, or just a fun way to explore the mystical arts, our interactive card spreads are designed to spark your intuition. Choose your deck, focus on your question, and let the universe reveal its wisdom."
     },
     "auth": {
         "welcomeTitle": "Welcome to Mystic Cards",
