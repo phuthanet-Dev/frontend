@@ -25,7 +25,7 @@ export default async function ArticleDetailLayout(props: {
 }) {
     const { slug } = await props.params;
     const article = ARTICLES.find((a) => a.slug === slug);
-    
+
     // JSON-LD schema payload (Rich Snippets)
     const jsonLd = article ? {
         "@context": "https://schema.org",
@@ -46,7 +46,7 @@ export default async function ArticleDetailLayout(props: {
         <>
             {jsonLd && (
                 <Script
-                    id={`json-ld-${article.slug}`}
+                    id={`json-ld-${slug}`}
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
