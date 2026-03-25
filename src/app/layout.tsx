@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { AuthContextProvider } from "@/context/AuthContext";
@@ -51,14 +52,14 @@ export default async function RootLayout({
                     href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
                     rel="stylesheet"
                 />
-                {/* Google AdSense */}
-                <script
+            </head>
+            <body className="antialiased">
+                <Script
                     async
                     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8365187612374784"
                     crossOrigin="anonymous"
+                    strategy="afterInteractive"
                 />
-            </head>
-            <body className="antialiased">
                 <div className="starfield" />
                 <AuthContextProvider>
                     <NextIntlClientProvider messages={messages}>
