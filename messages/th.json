@@ -20,7 +20,8 @@
         "step": "ขั้นตอนที่ {current} จาก {total}",
         "stepType": "ความสนใจ",
         "stepDeck": "สำรับไพ่",
-        "stepSpread": "จำนวนไพ่"
+        "stepSpread": "จำนวนไพ่",
+        "topup": "เติมเหรียญ"
     },
     "reading": {
         "selectType": "เลือกความสนใจ",

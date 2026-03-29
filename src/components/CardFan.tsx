@@ -60,22 +60,15 @@ export default function CardFan({ deck, maxSelections = 1, onCardsSelected }: Ca
         return () => clearTimeout(timer);
     }, []);
 
-    // Dynamic fan layout computation
+    // Stable fan layout — rendering all cards so highlight can step exactly by 1
     const fanLayout = useMemo(() => {
         const total = cards.length;
-        // Limit visible cards for performance with large decks
-        const maxVisible = isMobile ? 25 : 45;
-        const step = total > maxVisible ? Math.ceil(total / maxVisible) : 1;
         const visibleIndices: number[] = [];
-        for (let i = 0; i < total; i += step) {
+        for (let i = 0; i < total; i++) {
             visibleIndices.push(i);
         }
-        // Ensure last card is included
-        if (visibleIndices[visibleIndices.length - 1] !== total - 1) {
-            visibleIndices.push(total - 1);
-        }
 
-        const spreadAngle = isMobile ? 100 : 140;
+        const spreadAngle = isMobile ? 80 : 140;
         const startAngle = -spreadAngle / 2;
         const angleStep =
             visibleIndices.length > 1
@@ -89,6 +82,8 @@ export default function CardFan({ deck, maxSelections = 1, onCardsSelected }: Ca
             totalVisible: visibleIndices.length,
         }));
     }, [cards.length, isMobile]);
+
+
 
     const handleShuffle = useCallback(() => {
         if (isShuffling || isCutting || selectedIndices.length > 0) return;
@@ -182,10 +177,10 @@ export default function CardFan({ deck, maxSelections = 1, onCardsSelected }: Ca
         setHighlightedIndex(Math.round(value));
     }, []);
 
-    const cardW = isMobile ? 60 : 90;
-    const cardH = isMobile ? 96 : 144;
+    const cardW = isMobile ? 50 : 90;
+    const cardH = isMobile ? 80 : 144;
     // Fan radius — determines the curve
-    const fanRadius = isMobile ? 280 : 420;
+    const fanRadius = isMobile ? 200 : 420;
 
     return (
         <motion.div
@@ -233,7 +228,7 @@ export default function CardFan({ deck, maxSelections = 1, onCardsSelected }: Ca
 
                             // Position cards along an arc
                             const cx = isMobile ? 200 : 450; // center x
-                            const cy = isMobile ? 420 : 580; // pivot y (shifted down)
+                            const cy = isMobile ? 380 : 580; // pivot y
                             const cardX = cx + fanRadius * Math.sin(angleRad) - cardW / 2;
                             const cardY = cy - fanRadius * Math.cos(angleRad) - cardH;
 
@@ -312,7 +307,7 @@ export default function CardFan({ deck, maxSelections = 1, onCardsSelected }: Ca
                                                         x: cardX,
                                                         y: cardY,
                                                         rotate: rotation,
-                                                        scale: isHighlighted ? 1.12 : 1,
+                                                        scale: 1,
                                                         opacity: 1,
                                                         zIndex: isHighlighted ? 500 : fanPosition,
                                                     }
@@ -333,11 +328,7 @@ export default function CardFan({ deck, maxSelections = 1, onCardsSelected }: Ca
                                                         delay: fanPosition * 0.015,
                                                     }
                                     }
-                                    whileHover={
-                                        !isSelected && !isShuffling && !isCutting && selectedIndices.length < maxSelections
-                                            ? { y: cardY - 20, scale: 1.1, zIndex: 999 }
-                                            : undefined
-                                    }
+                                    whileHover={undefined}
                                     onHoverStart={() => !isShuffling && !isCutting && setHighlightedIndex(cardIndex)}
                                     onHoverEnd={() => !isShuffling && !isCutting && setHighlightedIndex(null)}
                                     onClick={() => !isShuffling && !isCutting && handleCardClick(cardIndex)}
@@ -428,33 +419,55 @@ export default function CardFan({ deck, maxSelections = 1, onCardsSelected }: Ca
                             {t("cards.cardNumber")} {cards.length}
                         </span>
                     </div>
-                    <input
-                        type="range"
-                        min={0}
-                        max={fanLayout.length - 1}
-                        step={1}
-                        value={
-                            highlightedIndex !== null
-                                ? fanLayout.findIndex((f) => f.cardIndex === highlightedIndex)
-                                : 0
-                        }
-                        onChange={(e) => {
-                            const fi = Number(e.target.value);
-                            if (fanLayout[fi]) {
-                                handleSliderChange(fanLayout[fi].cardIndex);
-                            }
-                        }}
-                        className="card-slider w-full"
-                    />
+                    <div className="flex items-center gap-3 w-full">
+                        <button
+                            onClick={() => {
+                                if (highlightedIndex !== null && highlightedIndex > 0) {
+                                    setHighlightedIndex(highlightedIndex - 1);
+                                } else if (highlightedIndex === null) {
+                                    setHighlightedIndex(0);
+                                }
+                            }}
+                            className="w-8 h-8 flex items-center justify-center rounded-full bg-mystic-800/80 border border-mystic-500/30 text-gold-400 active:bg-mystic-700 shrink-0"
+                            disabled={highlightedIndex === 0}
+                        >
+                            -
+                        </button>
+                        <input
+                            type="range"
+                            min={0}
+                            max={cards.length - 1}
+                            step={1}
+                            value={highlightedIndex !== null ? highlightedIndex : 0}
+                            onChange={(e) => {
+                                setHighlightedIndex(Number(e.target.value));
+                            }}
+                            className="card-slider flex-1 touch-none"
+                            style={{ touchAction: "none" }}
+                        />
+                        <button
+                            onClick={() => {
+                                if (highlightedIndex !== null && highlightedIndex < cards.length - 1) {
+                                    setHighlightedIndex(highlightedIndex + 1);
+                                } else if (highlightedIndex === null) {
+                                    setHighlightedIndex(0);
+                                }
+                            }}
+                            className="w-8 h-8 flex items-center justify-center rounded-full bg-mystic-800/80 border border-mystic-500/30 text-gold-400 active:bg-mystic-700 shrink-0"
+                            disabled={highlightedIndex === cards.length - 1}
+                        >
+                            +
+                        </button>
+                    </div>
                     {highlightedIndex !== null && (
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="text-center mt-3"
+                            className="text-center mt-4"
                         >
                             <button
                                 onClick={() => handleCardClick(highlightedIndex)}
-                                className="btn-outline text-sm px-6 py-2"
+                                className="btn-outline text-sm px-6 py-2 w-full max-w-[200px]"
                             >
                                 {t("cards.tapToSelect")} #{highlightedIndex + 1}
                             </button>

@@ -232,6 +232,7 @@ function TarotAppInner({
                                 readingsLeft={readingsLeft}
                                 userQuestion={userQuestion}
                                 onNewReading={handleNewReading}
+                                onOpenAuthModal={() => setIsAuthModalOpen(true)}
                             />
                         </motion.div>
                     )}

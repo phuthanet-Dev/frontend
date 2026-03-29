@@ -20,7 +20,8 @@
         "step": "Step {current} of {total}",
         "stepType": "Interest",
         "stepDeck": "Deck",
-        "stepSpread": "Spread"
+        "stepSpread": "Spread",
+        "topup": "Top up"
     },
     "reading": {
         "selectType": "Choose Your Interest",

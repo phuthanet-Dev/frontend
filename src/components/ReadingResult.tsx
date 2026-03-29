@@ -13,6 +13,7 @@ interface ReadingResultProps {
     readingsLeft?: number;
     userQuestion?: string;
     onNewReading: () => void;
+    onOpenAuthModal: () => void;
 }
 
 /** Parse Gemini JSON response and extract the text */
@@ -35,6 +36,7 @@ export default function ReadingResult({
     readingsLeft,
     userQuestion,
     onNewReading,
+    onOpenAuthModal,
 }: ReadingResultProps) {
     const t = useTranslations();
     const [readingText, setReadingText] = useState<string>("");
@@ -60,7 +62,7 @@ export default function ReadingResult({
 
     const handleGenerateWallpaper = async () => {
         if (!user) {
-            setWallpaperError("กรุณาเข้าสู่ระบบก่อนใช้งาน");
+            onOpenAuthModal();
             return;
         }
         if (coinBalance < 10) {
@@ -313,7 +315,7 @@ export default function ReadingResult({
                             <div className="chat-bubble-user rounded-2xl rounded-tr-sm p-4">
                                 <p className="text-sm text-white/90">
                                     สร้างวอลเปเปอร์เสริมดวง
-                                    {userQuestion ? ` ด้าน "${userQuestion}"` : ` ด้าน${readingType}`}
+                                    {userQuestion ? ` ด้าน "${userQuestion}"` : " ด้าน" + t(`reading.${readingType}` as any)}
                                 </p>
                             </div>
                         </div>
